@@ -15,7 +15,7 @@ import com.devbea.lotuskmm.android.presentation.recipes.RecipeListScreen
 fun Navigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = RecipeList.route) {
-        composable(route = RecipeList.route) { navBackStackEntry ->
+        composable(route = RecipeList.route) {
             RecipeListScreen(onSelectedRecipe = { recipeId ->
                 navController.navigate(RecipeDetail.route + "/$recipeId")
             })
@@ -29,6 +29,5 @@ fun Navigation() {
     }
 
 }
-
 
 private const val RECIPE_ID = "recipeId"
