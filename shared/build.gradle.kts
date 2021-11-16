@@ -1,9 +1,10 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 
 plugins {
-    kotlin("multiplatform")
-    kotlin("native.cocoapods")
-    id("com.android.library")
+    kotlin(KotlinPlugins.multiplatform)
+    kotlin(KotlinPlugins.cocoapods)
+    kotlin(KotlinPlugins.serialization) version Kotlin.version
+    id(Plugins.androidLibrary)
 }
 
 version = "1.0"
@@ -48,10 +49,23 @@ kotlin {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdk = Application.compileSdk
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdkVersion(24)
-        targetSdkVersion(30)
+        minSdk = Application.minSdk
+        targetSdk = Application.targetSdk
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    configurations{
+        create("androidTestAPi")
+        create("androidTestDebugAPi")
+        create("androidTestReleaseAPi")
+        create("testAPi")
+        create("testDebugAPi")
+        create("testReleaseAPi")
     }
 }
