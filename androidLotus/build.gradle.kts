@@ -3,6 +3,7 @@ plugins {
     kotlin(KotlinPlugins.android)
     kotlin(KotlinPlugins.kapt)
     kotlin(KotlinPlugins.serialization) version Kotlin.version
+    id(Plugins.hilt)
 }
 android {
 
@@ -46,6 +47,9 @@ dependencies {
     implementation(Compose.constraintLayout)
     implementation(Compose.activity)
     implementation(Compose.navigation)
+    implementation(Hilt.hiltAndroid)
+    implementation(Hilt.hiltNavigation)
+    kapt(Hilt.hiltCompiler)
     implementation(Google.material)
     implementation(Kotlinx.datetime)
     debugImplementation(SquareUp.leakCanary)
