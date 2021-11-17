@@ -27,23 +27,41 @@ kotlin {
         frameworkName = "shared"
         podfile = project.file("../iosLotus/Podfile")
     }
-    
+
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            // Add shared project dependencies here
+            dependencies {
+                implementation(Kotlinx.datetime)
+                implementation(Ktor.core)
+                implementation(Ktor.clientSerialization)
+            }
+        }
         val commonTest by getting {
+            // Add shared testing dependencies here
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting{
+            //add android dependencies here
+            dependencies{
+                implementation(Ktor.android)
+            }
+        }
         val androidTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation("junit:junit:4.13.2")
             }
         }
-        val iosMain by getting
+        val iosMain by getting {
+            //add iOS dependencies here
+            dependencies{
+                implementation(Ktor.ios)
+            }
+        }
         val iosTest by getting
     }
 }
@@ -60,7 +78,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
-    configurations{
+    configurations {
         create("androidTestAPi")
         create("androidTestDebugAPi")
         create("androidTestReleaseAPi")

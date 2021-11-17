@@ -49,6 +49,7 @@ dependencies {
     implementation(Compose.navigation)
     implementation(Hilt.hiltAndroid)
     implementation(Hilt.hiltNavigation)
+    implementation(Ktor.android)
     implementation(Hilt.hiltNavigationCompose)
     kapt(Hilt.hiltCompiler)
     implementation(Google.material)
