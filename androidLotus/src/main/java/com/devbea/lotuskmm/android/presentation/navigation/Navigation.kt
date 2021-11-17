@@ -1,33 +1,37 @@
-package com.devbea.lotuskmm.android.presentation
+package com.devbea.lotuskmm.android.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.devbea.lotuskmm.android.presentation.Screen.RecipeDetail
-import com.devbea.lotuskmm.android.presentation.Screen.RecipeList
+import com.devbea.lotuskmm.android.presentation.navigation.RouteParam.RECIPE_ID
+import com.devbea.lotuskmm.android.presentation.navigation.Screen.RecipeDetail
+import com.devbea.lotuskmm.android.presentation.navigation.Screen.RecipeList
 import com.devbea.lotuskmm.android.presentation.recipedetails.RecipeDetailScreen
+import com.devbea.lotuskmm.android.presentation.recipedetails.RecipeDetailsViewModel
 import com.devbea.lotuskmm.android.presentation.recipes.RecipeListScreen
+import com.devbea.lotuskmm.android.presentation.recipes.RecipeListViewModel
 
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = RecipeList.route) {
         composable(route = RecipeList.route) {
+            val viewMode = hiltViewModel<RecipeListViewModel>()
             RecipeListScreen(onSelectedRecipe = { recipeId ->
                 navController.navigate(RecipeDetail.route + "/$recipeId")
             })
         }
         composable(
-            route = RecipeDetail.route + "/{${RECIPE_ID}}",
+            route = RecipeDetail.route + "/{$RECIPE_ID}",
             arguments = listOf(navArgument(RECIPE_ID) { type = NavType.IntType })
-        ) { navBackStackEntry ->
-            RecipeDetailScreen(recipeId = navBackStackEntry.arguments?.getInt(RECIPE_ID))
+        ) {
+            val viewMode = hiltViewModel<RecipeDetailsViewModel>()
+            RecipeDetailScreen(viewMode.recipeId.value)
         }
     }
 
 }
-
-private const val RECIPE_ID = "recipeId"

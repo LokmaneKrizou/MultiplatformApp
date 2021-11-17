@@ -1,4 +1,4 @@
-package com.devbea.lotuskmm.android.presentation
+package com.devbea.lotuskmm.android.presentation.navigation
 
 sealed class Screen(val route: String) {
     object RecipeList : Screen("recipeList")
