@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.devbea.lotuskmm.android.presentation.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
 
+
+@ExperimentalStdlibApi
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

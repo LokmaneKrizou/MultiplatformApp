@@ -5,6 +5,7 @@ plugins {
     kotlin(KotlinPlugins.cocoapods)
     kotlin(KotlinPlugins.serialization) version Kotlin.version
     id(Plugins.androidLibrary)
+    id(Plugins.sqlDelight)
 }
 
 version = "1.0"
@@ -35,6 +36,8 @@ kotlin {
                 implementation(Kotlinx.datetime)
                 implementation(Ktor.core)
                 implementation(Ktor.clientSerialization)
+                implementation(SQLDelight.runtime)
+
             }
         }
         val commonTest by getting {
@@ -48,6 +51,7 @@ kotlin {
             //add android dependencies here
             dependencies{
                 implementation(Ktor.android)
+                implementation(SQLDelight.androidDriver)
             }
         }
         val androidTest by getting {
@@ -60,9 +64,16 @@ kotlin {
             //add iOS dependencies here
             dependencies{
                 implementation(Ktor.ios)
+                implementation(SQLDelight.nativeDriver)
             }
         }
         val iosTest by getting
+    }
+}
+sqldelight{
+    database("RecipeDatabase"){
+        packageName="${Application.packageRoot}.datasource.cache"
+        sourceFolders=listOf("sqldelight")
     }
 }
 

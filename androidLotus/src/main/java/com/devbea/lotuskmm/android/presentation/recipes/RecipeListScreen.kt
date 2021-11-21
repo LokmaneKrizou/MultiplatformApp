@@ -10,21 +10,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.devbea.lotuskmm.android.presentation.recipedetails.RecipeDetailScreen
+import com.devbea.lotuskmm.datasource.network.model.RecipeDto
+import com.devbea.lotuskmm.datasource.network.toRecipe
+import com.devbea.lotuskmm.domain.model.Recipe
+import com.devbea.lotuskmm.domain.util.DataState
 
 @Composable
-fun RecipeListScreen(onSelectedRecipe: ((Int) -> Unit)) {
-    LazyColumn {
-        items(100) { recipeId ->
-            Row(modifier = Modifier
-                .fillMaxWidth()
-                .clickable { onSelectedRecipe(recipeId) }) {
-                Text(
-                    modifier = Modifier.padding(16.dp),
-                    text = "Recipe ID = $recipeId"
-                )
-            }
+fun RecipeListScreen(screenState: DataState<List<Recipe>>?, onSelectedRecipe: ((Int) -> Unit)) {
+    screenState?.data?.let { recipes ->
+        LazyColumn {
+            items(recipes.size) { recipeId ->
+                val recipe = recipes[recipeId]
+                Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { onSelectedRecipe(recipe.id) }) {
+                    Text(
+                        modifier = Modifier.padding(16.dp),
+                        text = "Recipe = ${recipe.title}"
+                    )
+                }
 
+            }
         }
     }
 }
@@ -32,5 +38,21 @@ fun RecipeListScreen(onSelectedRecipe: ((Int) -> Unit)) {
 @Preview
 @Composable
 private fun RecipeListScreenPreview() {
-    RecipeListScreen{}
+    RecipeListScreen(
+        DataState.data(
+            data = listOf(
+                RecipeDto(
+                    1,
+                    "title",
+                    "me",
+                    "",
+                    5,
+                    "",
+                    listOf(),
+                    123,
+                    123
+                ).toRecipe()
+            )
+        )
+    ) {}
 }

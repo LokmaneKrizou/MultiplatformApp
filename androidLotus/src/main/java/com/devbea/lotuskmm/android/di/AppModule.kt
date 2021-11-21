@@ -2,6 +2,7 @@ package com.devbea.lotuskmm.android.di
 
 import android.content.Context
 import com.devbea.lotuskmm.android.BaseApplication
+import com.devbea.lotuskmm.domain.util.DatetimeUtil
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,4 +19,8 @@ object AppModule {
         return app as BaseApplication
 
     }
+
+    @Singleton
+    @Provides
+    fun provideDateTimeUtil(): DatetimeUtil = DatetimeUtil()
 }
