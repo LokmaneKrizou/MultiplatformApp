@@ -1,5 +1,6 @@
 package com.devbea.lotuskmm.android.presentation.navigation
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
@@ -15,6 +16,7 @@ import com.devbea.lotuskmm.android.presentation.recipedetails.RecipeDetailsViewM
 import com.devbea.lotuskmm.android.presentation.recipes.RecipeListScreen
 import com.devbea.lotuskmm.android.presentation.recipes.RecipeListViewModel
 
+@ExperimentalMaterialApi
 @Composable
 fun Navigation() {
     val navController = rememberNavController()

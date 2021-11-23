@@ -3,10 +3,12 @@ package com.devbea.lotuskmm.android
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material.ExperimentalMaterialApi
 import com.devbea.lotuskmm.android.presentation.navigation.Navigation
 import dagger.hilt.android.AndroidEntryPoint
 
 
+@ExperimentalMaterialApi
 @ExperimentalStdlibApi
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
