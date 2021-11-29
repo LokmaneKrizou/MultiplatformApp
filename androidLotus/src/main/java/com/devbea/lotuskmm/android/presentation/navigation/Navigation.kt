@@ -2,6 +2,7 @@ package com.devbea.lotuskmm.android.presentation.navigation
 
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -16,16 +17,20 @@ import com.devbea.lotuskmm.android.presentation.recipedetails.RecipeDetailsViewM
 import com.devbea.lotuskmm.android.presentation.recipes.RecipeListScreen
 import com.devbea.lotuskmm.android.presentation.recipes.RecipeListViewModel
 
+@ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = RecipeList.route) {
         composable(route = RecipeList.route) {
-            val viewMode = hiltViewModel<RecipeListViewModel>()
-            RecipeListScreen(viewMode.recipes.value, onSelectedRecipe = { recipeId ->
-                navController.navigate(RecipeDetail.route + "/$recipeId")
-            })
+            val viewModel = hiltViewModel<RecipeListViewModel>()
+            RecipeListScreen(
+                state = viewModel.state.value,
+                onTriggerEvent = viewModel::onTriggerEvent,
+                onSelectedRecipe = { recipeId ->
+                    navController.navigate(RecipeDetail.route + "/$recipeId")
+                })
         }
         composable(
             route = RecipeDetail.route + "/{$RECIPE_ID}",

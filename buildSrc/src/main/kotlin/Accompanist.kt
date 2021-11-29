@@ -1,4 +1,5 @@
 object Accompanist {
-    private const val version = "0.13.0"
-    const val coil = "com.google.accompanist:accompanist-coil:${version}"
+   private const val version="0.21.3-beta"
+    val systemUiController="com.google.accompanist:accompanist-systemuicontroller:$version"
+
 }

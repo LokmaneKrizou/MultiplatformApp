@@ -36,7 +36,9 @@ android {
 }
 dependencies {
     implementation(project(":shared"))
+    implementation(Accompanist.systemUiController)
     implementation(AndroidX.appCompat)
+    implementation(Skydoves.compose)
     implementation(Compose.runtime)
     implementation(Compose.runtimeLiveData)
     implementation(Compose.ui)

@@ -11,6 +11,7 @@ val White= Color(0xFFFFFFFF)
 val Pink100 = Color(0xFFf8bbd0)
 
 val Grey1 = Color(0xFFF5F5F5)
+val Grey2 = Color(0xFFDEDEDE)
 
 val Black1 = Color(0xFF263238)
 val Black2 = Color(0xFF200E32)

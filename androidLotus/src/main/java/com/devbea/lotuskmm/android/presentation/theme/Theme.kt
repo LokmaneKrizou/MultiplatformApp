@@ -7,8 +7,12 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import com.devbea.lotuskmm.android.presentation.recipes.components.CircularProgressBar
+import com.devbea.lotuskmm.presentation.recipe_list.ScreenPosition
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val LightThemeColors = lightColors(
     primary = White,
@@ -30,22 +34,33 @@ private val LightThemeColors = lightColors(
 @Composable
 fun AppTheme(
     displayProgressBar: Boolean,
+    positionProgressBar: Float = ScreenPosition.TOP.value,
     content: @Composable () -> Unit,
 ) {
+    val systemUiController = rememberSystemUiController()
+//    val useDarkIcons = MaterialTheme.colors.isLight
     MaterialTheme(
         colors = LightThemeColors,
         typography = QuickSandTypography,
         shapes = AppShapes
     ) {
+        SideEffect {
+            systemUiController.setSystemBarsColor(
+                color = Pink600Dark,
+                darkIcons = false
+            )
+            systemUiController.setNavigationBarColor(color = Grey1, darkIcons = false)
+        }
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .background(color = Grey1)
         ) {
             content()
-            if (displayProgressBar) {
-                // TODO("Show indeterminate progress bar")
-            }
+            CircularProgressBar(
+                isDisplayed = displayProgressBar,
+                verticalBias = positionProgressBar
+            )
         }
     }
 }
