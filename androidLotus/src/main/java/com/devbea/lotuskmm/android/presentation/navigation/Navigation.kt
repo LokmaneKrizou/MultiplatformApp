@@ -36,8 +36,11 @@ fun Navigation() {
             route = RecipeDetail.route + "/{$RECIPE_ID}",
             arguments = listOf(navArgument(RECIPE_ID) { type = NavType.IntType })
         ) {
-            val viewMode = hiltViewModel<RecipeDetailsViewModel>()
-            viewMode.recipe.value?.data?.let { RecipeDetailScreen(it) }
+            val viewModel = hiltViewModel<RecipeDetailsViewModel>()
+            RecipeDetailScreen(
+                state = viewModel.state.value,
+                onTriggerEvent = viewModel::onTriggerEvent
+            )
 
         }
     }

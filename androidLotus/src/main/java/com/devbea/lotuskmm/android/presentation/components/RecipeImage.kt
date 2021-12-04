@@ -10,6 +10,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.devbea.lotuskmm.android.R
 import com.devbea.lotuskmm.android.presentation.theme.Grey2
 import com.skydoves.landscapist.ShimmerParams
 import com.skydoves.landscapist.glide.GlideImage
@@ -17,12 +18,14 @@ import com.skydoves.landscapist.glide.GlideImage
 val RECIPE_IMAGE_HEIGHT = 220.dp
 
 @Composable
-fun RecipeImage(url: String) {
+fun RecipeImage(
+    url: String, modifier: Modifier = Modifier
+        .fillMaxWidth()
+        .height(RECIPE_IMAGE_HEIGHT)
+) {
     GlideImage(
         imageModel = url,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(RECIPE_IMAGE_HEIGHT),
+        modifier = modifier,
         requestOptions = {
             RequestOptions()
                 .override(256, 256)
@@ -37,7 +40,9 @@ fun RecipeImage(url: String) {
             dropOff = 0.65f,
             tilt = 20f
         ),
+        previewPlaceholder = R.drawable.ic_placehoder,
         failure = {
             Text(text = "image request failed.")
-        })
+        }
+    )
 }

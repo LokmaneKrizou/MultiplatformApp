@@ -65,7 +65,7 @@ private fun RecipeListScreenPreview() {
                     1,
                     "title",
                     "me",
-                    "",
+                    "s",
                     5,
                     "",
                     listOf(),

@@ -1,4 +1,8 @@
 package com.devbea.lotuskmm.presentation.recipe_detail
 
-class RecipeDetailState {
-}
+import com.devbea.lotuskmm.domain.model.Recipe
+
+data class RecipeDetailState(
+    val isLoading: Boolean = false,
+    val recipe: Recipe? = null
+)

@@ -6,9 +6,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devbea.lotuskmm.android.presentation.navigation.RouteParam.RECIPE_ID
-import com.devbea.lotuskmm.domain.model.Recipe
-import com.devbea.lotuskmm.domain.util.DataState
 import com.devbea.lotuskmm.interactors.recipe_detail.GetRecipe
+import com.devbea.lotuskmm.presentation.recipe_detail.RecipeDetailEvents
+import com.devbea.lotuskmm.presentation.recipe_detail.RecipeDetailState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -21,20 +21,37 @@ class RecipeDetailsViewModel @Inject constructor(
     private val getRecipeUseCase: GetRecipe
 ) : ViewModel() {
 
-    val recipe: MutableState<DataState<Recipe>?> = mutableStateOf(null)
-
+    val state: MutableState<RecipeDetailState> = mutableStateOf(RecipeDetailState())
     init {
         savedStateHandle.get<Int?>(RECIPE_ID)?.let { recipeId ->
-            getRecipeById(recipeId)
+            onTriggerEvent(RecipeDetailEvents.LoadRecipe(recipeId))
+
+        }
+    }
+    fun onTriggerEvent(event: RecipeDetailEvents) {
+        when (event) {
+            is RecipeDetailEvents.LoadRecipe -> {
+                getRecipeById(event.id)
+            }
+            else -> {
+                handleError("Invalid event")
+            }
         }
     }
 
-    fun getRecipeById(id: Int) {
+    private fun handleError(message: String) {
+        print(message)
+    }
+
+    private fun getRecipeById(id: Int) {
         getRecipeUseCase.execute(id).onEach { dataState ->
-            recipe.value = dataState
-            println("RecipeDetail: ${dataState.isLoading}")
-            dataState.data?.let { recipe -> println("RecipeDetail: $recipe") }
-            dataState.message?.let { message -> println("RecipeDetail: $message") }
+            state.value = state.value.copy(isLoading = dataState.isLoading)
+            dataState.data?.let { recipe ->
+                state.value = state.value.copy(recipe = recipe)
+            }
+            dataState.message?.let { message ->
+                handleError(message)
+            }
         }.launchIn(viewModelScope)
     }
 }
