@@ -20,7 +20,8 @@ fun ShimmerRecipeCardItem(
     yShimmer: Float,
     cardHeight: Dp,
     gradientWidth: Float,
-    padding: Dp
+    padding: Dp,
+    numberOfLines: Int = 1
 ) {
     val brush =
         Brush.linearGradient(
@@ -40,16 +41,16 @@ fun ShimmerRecipeCardItem(
 
             )
         }
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Surface(shape = MaterialTheme.shapes.small) {
-            Spacer(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(cardHeight/10)
-                    .background(brush = brush)
-
-            )
+        for (item in 1..numberOfLines) {
+            Spacer(modifier = Modifier.height(8.dp))
+            Surface(shape = MaterialTheme.shapes.small) {
+                Spacer(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(cardHeight / 10)
+                        .background(brush = brush)
+                )
+            }
         }
     }
 }

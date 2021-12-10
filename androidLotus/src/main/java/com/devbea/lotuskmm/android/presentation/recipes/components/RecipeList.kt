@@ -18,7 +18,10 @@ fun RecipeList(
 
     when {
         isLoading && recipes.isEmpty() -> {
-            LoadingRecipeListShimmer(imageHeight = RECIPE_IMAGE_HEIGHT)
+            LoadingRecipeShimmer(
+                imageHeight = RECIPE_IMAGE_HEIGHT,
+                numberOfLines = 1
+            )
         }
         recipes.isEmpty() -> {
             // Empty view

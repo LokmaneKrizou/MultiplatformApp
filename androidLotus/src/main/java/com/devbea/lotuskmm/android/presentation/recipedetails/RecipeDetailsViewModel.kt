@@ -6,6 +6,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devbea.lotuskmm.android.presentation.navigation.RouteParam.RECIPE_ID
+import com.devbea.lotuskmm.android.presentation.util.invalidEventErrorDialog
+import com.devbea.lotuskmm.domain.model.GenericMessageInfo
+import com.devbea.lotuskmm.domain.util.GenericInfoUtil
+import com.devbea.lotuskmm.domain.util.Queue
 import com.devbea.lotuskmm.interactors.recipe_detail.GetRecipe
 import com.devbea.lotuskmm.presentation.recipe_detail.RecipeDetailEvents
 import com.devbea.lotuskmm.presentation.recipe_detail.RecipeDetailState
@@ -22,25 +26,49 @@ class RecipeDetailsViewModel @Inject constructor(
 ) : ViewModel() {
 
     val state: MutableState<RecipeDetailState> = mutableStateOf(RecipeDetailState())
+
     init {
         savedStateHandle.get<Int?>(RECIPE_ID)?.let { recipeId ->
             onTriggerEvent(RecipeDetailEvents.LoadRecipe(recipeId))
 
         }
     }
+
     fun onTriggerEvent(event: RecipeDetailEvents) {
         when (event) {
             is RecipeDetailEvents.LoadRecipe -> {
                 getRecipeById(event.id)
             }
+            RecipeDetailEvents.OnRemoveHeadMessageFromQueue -> {
+                removeHeadMessage()
+            }
             else -> {
-                handleError("Invalid event")
+                appendToMessageQueue(invalidEventErrorDialog())
             }
         }
     }
 
-    private fun handleError(message: String) {
-        print(message)
+    private fun removeHeadMessage() {
+        try {
+            val queue = state.value.queue
+            queue.remove()
+            state.value = state.value.copy(queue = Queue(mutableListOf()))
+            state.value = state.value.copy(queue = queue)
+        } catch (e: Exception) {
+            //Nothing to remove, empty queue
+        }
+    }
+
+    private fun appendToMessageQueue(errorMessage: GenericMessageInfo.Builder) {
+        val queue = state.value.queue
+        if (!GenericInfoUtil().doesMessageAlreadyExistInQueue(
+                queue = queue,
+                messageInfo = errorMessage.build()
+            )
+        ) {
+            queue.add(errorMessage.build())
+            state.value = state.value.copy(queue = queue)
+        }
     }
 
     private fun getRecipeById(id: Int) {
@@ -50,7 +78,7 @@ class RecipeDetailsViewModel @Inject constructor(
                 state.value = state.value.copy(recipe = recipe)
             }
             dataState.message?.let { message ->
-                handleError(message)
+                appendToMessageQueue(message)
             }
         }.launchIn(viewModelScope)
     }

@@ -4,7 +4,11 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.devbea.lotuskmm.android.presentation.util.invalidEventErrorDialog
+import com.devbea.lotuskmm.domain.model.GenericMessageInfo
 import com.devbea.lotuskmm.domain.model.Recipe
+import com.devbea.lotuskmm.domain.util.GenericInfoUtil
+import com.devbea.lotuskmm.domain.util.Queue
 import com.devbea.lotuskmm.interactors.recipe_list.SearchRecipes
 import com.devbea.lotuskmm.presentation.recipe_list.FoodCategory
 import com.devbea.lotuskmm.presentation.recipe_list.RecipeListEvents
@@ -41,9 +45,23 @@ class RecipeListViewModel @Inject constructor(private val searchRecipes: SearchR
             is RecipeListEvents.OnSelectCategory -> {
                 onSelectCategory(event.category)
             }
-            else -> {
-                handleError("Invalid event")
+            RecipeListEvents.OnRemoveHeadMessageFromQueue -> {
+                removeHeadMessage()
             }
+            else -> {
+                appendToMessageQueue(invalidEventErrorDialog())
+            }
+        }
+    }
+
+    private fun removeHeadMessage() {
+        try {
+            val queue = state.value.queue
+            queue.remove()
+            state.value = state.value.copy(queue = Queue(mutableListOf()))
+            state.value = state.value.copy(queue = queue)
+        } catch (e: Exception) {
+            //Nothing to remove, empty queue
         }
     }
 
@@ -57,8 +75,17 @@ class RecipeListViewModel @Inject constructor(private val searchRecipes: SearchR
         loadRecipes()
     }
 
-    private fun handleError(errorMessage: String) {
+    private fun appendToMessageQueue(errorMessage: GenericMessageInfo.Builder) {
+        val queue = state.value.queue
 
+        if (!GenericInfoUtil().doesMessageAlreadyExistInQueue(
+                queue = queue,
+                messageInfo = errorMessage.build()
+            )
+        ) {
+            queue.add(errorMessage.build())
+            state.value = state.value.copy(queue = queue)
+        }
     }
 
     private fun nextPage() {
@@ -73,7 +100,7 @@ class RecipeListViewModel @Inject constructor(private val searchRecipes: SearchR
         searchRecipes.execute(state.value.page, state.value.query).onEach { dataState ->
             state.value = state.value.copy(isLoading = dataState.isLoading)
             dataState.data?.let { appendRecipes(it) }
-            dataState.message?.let { message -> handleError(message) }
+            dataState.message?.let { message -> appendToMessageQueue(message) }
         }.launchIn(viewModelScope)
     }
 

@@ -12,9 +12,11 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun LoadingRecipeListShimmer(
+fun LoadingRecipeShimmer(
     imageHeight: Dp,
-    padding: Dp = 16.dp
+    padding: Dp = 16.dp,
+    numberOfItems: Int = 5,
+    numberOfLines: Int = 1
 ) {
 
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
@@ -30,14 +32,15 @@ fun LoadingRecipeListShimmer(
             Color.LightGray.copy(0.9f)
         )
         LazyColumn {
-            items(5) {
+            items(numberOfItems) {
                 ShimmerRecipeCardItem(
                     colors = colors,
                     xShimmer = xCardShimmer.value,
                     yShimmer = yCardShimmer.value,
                     cardHeight = imageHeight,
                     gradientWidth = gradientWidth,
-                    padding = padding
+                    padding = padding,
+                    numberOfLines = numberOfLines
                 )
             }
         }

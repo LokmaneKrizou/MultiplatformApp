@@ -2,7 +2,9 @@ package com.devbea.lotuskmm.interactors.recipe_detail
 
 import com.devbea.lotuskmm.datasource.cache.RecipeCache
 import com.devbea.lotuskmm.datasource.network.RecipeService
+import com.devbea.lotuskmm.domain.model.GenericMessageInfo
 import com.devbea.lotuskmm.domain.model.Recipe
+import com.devbea.lotuskmm.domain.model.UIComponentType
 import com.devbea.lotuskmm.domain.util.DataState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -22,7 +24,15 @@ class GetRecipe(
             }
             emit(DataState.data(data = recipeCache.get(recipeId)))
         } catch (e: Exception) {
-            emit(DataState.error(message = e.message ?: "Unknown Error"))
+            emit(
+                DataState.error(
+                    message = GenericMessageInfo.Builder()
+                        .id("GetRecipe.Error")
+                        .title("Error")
+                        .uiComponentType(UIComponentType.Dialog)
+                        .description(e.message ?: "unknown error")
+                )
+            )
         }
     }
 }

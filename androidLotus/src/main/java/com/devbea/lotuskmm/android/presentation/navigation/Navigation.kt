@@ -17,6 +17,7 @@ import com.devbea.lotuskmm.android.presentation.recipedetails.RecipeDetailsViewM
 import com.devbea.lotuskmm.android.presentation.recipes.RecipeListScreen
 import com.devbea.lotuskmm.android.presentation.recipes.RecipeListViewModel
 
+@ExperimentalStdlibApi
 @ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @Composable

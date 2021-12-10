@@ -10,7 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import com.devbea.lotuskmm.android.presentation.components.ProcessDialogQueue
 import com.devbea.lotuskmm.android.presentation.recipes.components.CircularProgressBar
+import com.devbea.lotuskmm.domain.model.GenericMessageInfo
+import com.devbea.lotuskmm.domain.model.UIComponentType
+import com.devbea.lotuskmm.domain.util.Queue
 import com.devbea.lotuskmm.presentation.recipe_list.ScreenPosition
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -34,6 +38,8 @@ private val LightThemeColors = lightColors(
 @Composable
 fun AppTheme(
     displayProgressBar: Boolean,
+    dialogQueue: Queue<GenericMessageInfo> = Queue(mutableListOf()),
+    onRemoveHeadFromQueue: () -> Unit,
     positionProgressBar: Float = ScreenPosition.TOP.value,
     content: @Composable () -> Unit,
 ) {
@@ -56,6 +62,23 @@ fun AppTheme(
                 .fillMaxSize()
                 .background(color = Grey1)
         ) {
+            when (dialogQueue.items.firstOrNull()?.uiComponentType) {
+                UIComponentType.Dialog -> {
+                    ProcessDialogQueue(
+                        dialogQueue = dialogQueue,
+                        onRemoveHeadFromQueue = onRemoveHeadFromQueue
+                    )
+                    content()
+                    CircularProgressBar(
+                        isDisplayed = displayProgressBar,
+                        verticalBias = positionProgressBar
+                    )
+                }
+
+                UIComponentType.None -> {
+
+                }
+            }
             content()
             CircularProgressBar(
                 isDisplayed = displayProgressBar,

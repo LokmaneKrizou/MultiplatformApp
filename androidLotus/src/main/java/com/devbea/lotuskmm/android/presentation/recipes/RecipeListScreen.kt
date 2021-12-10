@@ -13,6 +13,7 @@ import com.devbea.lotuskmm.datasource.network.model.RecipeDto
 import com.devbea.lotuskmm.datasource.network.toRecipe
 import com.devbea.lotuskmm.presentation.recipe_list.FoodCategoryUtil
 import com.devbea.lotuskmm.presentation.recipe_list.RecipeListEvents
+import com.devbea.lotuskmm.presentation.recipe_list.RecipeListEvents.OnRemoveHeadMessageFromQueue
 import com.devbea.lotuskmm.presentation.recipe_list.RecipeListState
 
 @ExperimentalMaterialApi
@@ -25,7 +26,9 @@ fun RecipeListScreen(
 ) {
     AppTheme(
         displayProgressBar = state.isLoading,
-        positionProgressBar = state.loaderPosition
+        dialogQueue = state.queue,
+        positionProgressBar = state.loaderPosition,
+        onRemoveHeadFromQueue = { onTriggerEvent(OnRemoveHeadMessageFromQueue) }
     ) {
         val foodCategories = remember { FoodCategoryUtil().getAllFoodCategories() }
         Scaffold(topBar = {
