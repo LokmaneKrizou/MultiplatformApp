@@ -8,18 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
-		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 		A79524E3336FA16086B2CAF8 /* Pods_iosLotus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11FB52707F64D9B323150D7C /* Pods_iosLotus.framework */; };
+		FF987B2627666D83006C2981 /* RecipeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF987B2527666D83006C2981 /* RecipeListViewModel.swift */; };
+		FFB7B7342766618A00B4DC10 /* RecipeListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB7B7332766618A00B4DC10 /* RecipeListScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		11FB52707F64D9B323150D7C /* Pods_iosLotus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iosLotus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosLotus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosLotus.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF9077F03B07AEBC9C565F3B /* Pods-iosLotus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosLotus.debug.xcconfig"; path = "Target Support Files/Pods-iosLotus/Pods-iosLotus.debug.xcconfig"; sourceTree = "<group>"; };
 		E8EF7EA20C84B4E8FB074C8B /* Pods-iosLotus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosLotus.release.xcconfig"; path = "Target Support Files/Pods-iosLotus/Pods-iosLotus.release.xcconfig"; sourceTree = "<group>"; };
+		FF987B2527666D83006C2981 /* RecipeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewModel.swift; sourceTree = "<group>"; };
+		FFB7B7332766618A00B4DC10 /* RecipeListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +66,7 @@
 		7555FF7D242A565900829871 /* iosLotus */ = {
 			isa = PBXGroup;
 			children = (
-				7555FF82242A565900829871 /* ContentView.swift */,
+				FFB7B7312766612C00B4DC10 /* presentation */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 			);
@@ -77,6 +79,23 @@
 				11FB52707F64D9B323150D7C /* Pods_iosLotus.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FFB7B7312766612C00B4DC10 /* presentation */ = {
+			isa = PBXGroup;
+			children = (
+				FFB7B7322766614D00B4DC10 /* recipe_list */,
+			);
+			path = presentation;
+			sourceTree = "<group>";
+		};
+		FFB7B7322766614D00B4DC10 /* recipe_list */ = {
+			isa = PBXGroup;
+			children = (
+				FFB7B7332766618A00B4DC10 /* RecipeListScreen.swift */,
+				FF987B2527666D83006C2981 /* RecipeListViewModel.swift */,
+			);
+			path = recipe_list;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,8 +192,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFB7B7342766618A00B4DC10 /* RecipeListScreen.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
-				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				FF987B2627666D83006C2981 /* RecipeListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
