@@ -14,8 +14,6 @@ import com.devbea.lotuskmm.interactors.recipe_detail.GetRecipe
 import com.devbea.lotuskmm.presentation.recipe_detail.RecipeDetailEvents
 import com.devbea.lotuskmm.presentation.recipe_detail.RecipeDetailState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @OptIn(ExperimentalStdlibApi::class)
@@ -72,14 +70,15 @@ class RecipeDetailsViewModel @Inject constructor(
     }
 
     private fun getRecipeById(id: Int) {
-        getRecipeUseCase.execute(id).onEach { dataState ->
-            state.value = state.value.copy(isLoading = dataState.isLoading)
-            dataState.data?.let { recipe ->
-                state.value = state.value.copy(recipe = recipe)
+        getRecipeUseCase.execute(id)
+            .collectCommon(coroutineScope = viewModelScope) { dataState ->
+                state.value = state.value.copy(isLoading = dataState.isLoading)
+                dataState.data?.let { recipe ->
+                    state.value = state.value.copy(recipe = recipe)
+                }
+                dataState.message?.let { message ->
+                    appendToMessageQueue(message)
+                }
             }
-            dataState.message?.let { message ->
-                appendToMessageQueue(message)
-            }
-        }.launchIn(viewModelScope)
     }
 }

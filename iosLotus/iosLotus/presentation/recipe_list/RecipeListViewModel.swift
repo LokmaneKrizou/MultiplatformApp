@@ -22,6 +22,7 @@ class RecipeListViewModel :ObservableObject{
     init(searchRecipes:SearchRecipes, foodCategoryUtil: FoodCategoryUtil) {
         self.searchRecipes = searchRecipes
         self.foodCategoryUtil = foodCategoryUtil
+        onTriggerEvent(stateEvent: RecipeListEvents.LoadRecipes())
         
         // TODO: perfom search
     }
@@ -29,7 +30,7 @@ class RecipeListViewModel :ObservableObject{
     func onTriggerEvent(stateEvent: RecipeListEvents){
         switch stateEvent {
         case is RecipeListEvents.LoadRecipes:
-            doNothing()
+            loadRecipes()
         case is RecipeListEvents.NewSearch:
             doNothing()
         case is RecipeListEvents.NextPage:
@@ -41,6 +42,40 @@ class RecipeListViewModel :ObservableObject{
         default:
             doNothing()
         }
+    }
+    
+    func loadRecipes(){
+        let currentState = self.state.copy() as! RecipeListState
+        do{
+            try searchRecipes.execute(page:Int32(currentState.page) , query:currentState.query)
+                .collectCommon(coroutineScope: nil, callback: {dataState in
+                    if dataState != nil{
+                        let data = dataState?.data
+                        let message = dataState?.message
+                        let loading = dataState?.isLoading
+                        self.updateState(isLoading: loading)
+                        if data != nil {
+                            self.appendRecipes(recipes:data as! [Recipe])
+                        }
+                        if message != nil {
+                            self.handleMessageByUIComponentType(message!.build())
+                        }
+                    }
+                    
+                })
+        }catch{
+            print("\(error)")
+        }
+        
+    }
+    func appendRecipes(recipes: [Recipe]){
+        for recipe in recipes {
+            print("\(recipe.title)")
+        }
+        //    TODO: append recipes to state
+    }
+    func handleMessageByUIComponentType(_ messageInfo: GenericMessageInfo){
+        
     }
     func doNothing(){
         

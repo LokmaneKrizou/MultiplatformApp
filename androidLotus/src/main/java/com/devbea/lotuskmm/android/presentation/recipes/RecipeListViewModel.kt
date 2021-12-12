@@ -15,8 +15,6 @@ import com.devbea.lotuskmm.presentation.recipe_list.RecipeListEvents
 import com.devbea.lotuskmm.presentation.recipe_list.RecipeListState
 import com.devbea.lotuskmm.presentation.recipe_list.ScreenPosition
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
@@ -97,11 +95,12 @@ class RecipeListViewModel @Inject constructor(private val searchRecipes: SearchR
     }
 
     private fun loadRecipes() {
-        searchRecipes.execute(state.value.page, state.value.query).onEach { dataState ->
-            state.value = state.value.copy(isLoading = dataState.isLoading)
-            dataState.data?.let { appendRecipes(it) }
-            dataState.message?.let { message -> appendToMessageQueue(message) }
-        }.launchIn(viewModelScope)
+        searchRecipes.execute(state.value.page, state.value.query)
+            .collectCommon(coroutineScope = viewModelScope) { dataState ->
+                state.value = state.value.copy(isLoading = dataState.isLoading)
+                dataState.data?.let { appendRecipes(it) }
+                dataState.message?.let { message -> appendToMessageQueue(message) }
+            }
     }
 
     private fun appendRecipes(recipes: List<Recipe>) {
