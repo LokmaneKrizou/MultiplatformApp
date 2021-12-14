@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		A79524E3336FA16086B2CAF8 /* Pods_iosLotus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11FB52707F64D9B323150D7C /* Pods_iosLotus.framework */; };
+		FF843C6727695E080050FFAE /* SearchAppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF843C6627695E080050FFAE /* SearchAppBar.swift */; };
 		FF987B2627666D83006C2981 /* RecipeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF987B2527666D83006C2981 /* RecipeListViewModel.swift */; };
 		FFB7B7342766618A00B4DC10 /* RecipeListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB7B7332766618A00B4DC10 /* RecipeListScreen.swift */; };
 /* End PBXBuildFile section */
@@ -20,6 +21,7 @@
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF9077F03B07AEBC9C565F3B /* Pods-iosLotus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosLotus.debug.xcconfig"; path = "Target Support Files/Pods-iosLotus/Pods-iosLotus.debug.xcconfig"; sourceTree = "<group>"; };
 		E8EF7EA20C84B4E8FB074C8B /* Pods-iosLotus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosLotus.release.xcconfig"; path = "Target Support Files/Pods-iosLotus/Pods-iosLotus.release.xcconfig"; sourceTree = "<group>"; };
+		FF843C6627695E080050FFAE /* SearchAppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAppBar.swift; sourceTree = "<group>"; };
 		FF987B2527666D83006C2981 /* RecipeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewModel.swift; sourceTree = "<group>"; };
 		FFB7B7332766618A00B4DC10 /* RecipeListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,9 +83,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FF843C6527695DE70050FFAE /* component */ = {
+			isa = PBXGroup;
+			children = (
+				FF843C6627695E080050FFAE /* SearchAppBar.swift */,
+			);
+			path = component;
+			sourceTree = "<group>";
+		};
 		FFB7B7312766612C00B4DC10 /* presentation */ = {
 			isa = PBXGroup;
 			children = (
+				FF843C6527695DE70050FFAE /* component */,
 				FFB7B7322766614D00B4DC10 /* recipe_list */,
 			);
 			path = presentation;
@@ -193,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFB7B7342766618A00B4DC10 /* RecipeListScreen.swift in Sources */,
+				FF843C6727695E080050FFAE /* SearchAppBar.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				FF987B2627666D83006C2981 /* RecipeListViewModel.swift in Sources */,
 			);
