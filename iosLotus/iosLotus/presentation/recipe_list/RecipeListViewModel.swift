@@ -17,7 +17,8 @@ class RecipeListViewModel :ObservableObject{
     let foodCategoryUtil: FoodCategoryUtil
     
     @Published var state: RecipeListState = RecipeListState()
-    
+    @Published var showDialog: Bool = false
+
     
     init(searchRecipes:SearchRecipes, foodCategoryUtil: FoodCategoryUtil) {
         self.searchRecipes = searchRecipes
@@ -32,22 +33,24 @@ class RecipeListViewModel :ObservableObject{
         case is RecipeListEvents.LoadRecipes:
             loadRecipes()
         case is RecipeListEvents.NewSearch:
-            doNothing()
+            newSearch()
         case is RecipeListEvents.NextPage:
             nextPage()
         case is RecipeListEvents.OnRemoveHeadMessageFromQueue:
-            doNothing()
+            removeHeadFromQueue()
         case is RecipeListEvents.OnUpdateQuery:
-            doNothing()
+            updateState(query:(stateEvent as? RecipeListEvents.OnUpdateQuery)?.query)
+        case is RecipeListEvents.OnSelectCategory:
+            onSelectCategory(category: (stateEvent as? RecipeListEvents.OnSelectCategory)?.category)
         default:
             doNothing()
         }
     }
     
+    
     func loadRecipes(){
         let currentState = self.state.copy() as! RecipeListState
-        do{
-            try searchRecipes.execute(page:Int32(currentState.page) , query:currentState.query)
+         searchRecipes.execute(page:Int32(currentState.page) , query:currentState.query)
                 .collectCommon(coroutineScope: nil, callback: {dataState in
                     if dataState != nil{
                         let data = dataState?.data
@@ -63,9 +66,6 @@ class RecipeListViewModel :ObservableObject{
                     }
                     
                 })
-        }catch{
-            print("\(error)")
-        }
         
     }
     private func appendRecipes(recipes: [Recipe]){
@@ -106,8 +106,67 @@ class RecipeListViewModel :ObservableObject{
         }
         return false
     }
-    func handleMessageByUIComponentType(_ messageInfo: GenericMessageInfo){
+    
+    private func newSearch(){
+        reseatSearchState()
+        loadRecipes()
+    }
+    private func onSelectCategory(category:FoodCategory?){
+        updateState(query: category?.value ?? "",selectedCategory:category)
+        newSearch()
         
+    }
+    private func reseatSearchState(){
+        let currentState = (self.state.copy() as! RecipeListState)
+        var foodCategory = currentState.selectedCategory
+        if foodCategory?.value != currentState.query{
+            foodCategory=nil
+        }
+        self.state = self.state.doCopy(isLoading:currentState.isLoading,
+                                       page: 1,
+                                       query: currentState.query,
+                                       selectedCategory: foodCategory,
+                                       recipes: [],
+                                       bottomRecipe:currentState.bottomRecipe,
+                                       queue:currentState.queue
+        )
+        
+    }
+    private func appendToQueue(message: GenericMessageInfo){
+          let currentState = (self.state.copy() as! RecipeListState)
+          let queue = currentState.queue
+          let queueUtil = GenericInfoUtil() // prevent duplicates
+          if !queueUtil.doesMessageAlreadyExistInQueue(queue: queue, messageInfo: message) {
+              queue.add(element: message)
+              updateState(queue: queue)
+          }
+      }
+    
+    func removeHeadFromQueue(){
+          let currentState = (self.state.copy() as! RecipeListState)
+          let queue = currentState.queue
+          do {
+              try queue.remove()
+              updateState(queue: queue)
+          }catch{
+              print("\(error)")
+          }
+      }
+      
+      func shouldShowDialog(){
+          let currentState = (self.state.copy() as! RecipeListState)
+          showDialog = currentState.queue.items.count > 0
+      }
+      
+    func handleMessageByUIComponentType(_ messageInfo: GenericMessageInfo){
+        switch messageInfo.uiComponentType{
+        case UIComponentType.Dialog():
+            appendToQueue(message: messageInfo)
+        case UIComponentType.None():
+            print("\(messageInfo.description)")
+        default:
+            doNothing()
+        }
     }
     func doNothing(){
         
@@ -117,17 +176,19 @@ class RecipeListViewModel :ObservableObject{
         page:Int? = nil,
         query:String? = nil,
         bottomRecipe: Recipe? = nil,
+        selectedCategory: FoodCategory? = nil,
         queue :Queue<GenericMessageInfo>?=nil
     ){
         let currentState = self.state.copy() as! RecipeListState
-        
         self.state = self.state.doCopy(isLoading: isLoading ?? currentState.isLoading,
                                        page: Int32(page ?? Int(currentState.page)),
                                        query: query ?? currentState.query,
-                                       selectedCategory: currentState.selectedCategory,
+                                       selectedCategory: selectedCategory ?? currentState.selectedCategory,
                                        recipes: currentState.recipes,
                                        bottomRecipe:bottomRecipe,
                                        queue:queue ?? currentState.queue
         )
+        shouldShowDialog()
+    
     }
 }

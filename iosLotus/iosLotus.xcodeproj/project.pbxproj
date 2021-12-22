@@ -3,15 +3,29 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		A79524E3336FA16086B2CAF8 /* Pods_iosLotus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11FB52707F64D9B323150D7C /* Pods_iosLotus.framework */; };
+		FF17D0622771347C002283F2 /* FoodCategoryChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF17D0612771347C002283F2 /* FoodCategoryChip.swift */; };
+		FF17D06427720992002283F2 /* RecipeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF17D06327720992002283F2 /* RecipeCard.swift */; };
+		FF17D06727722A15002283F2 /* RecipeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF17D06627722A14002283F2 /* RecipeDetailViewModel.swift */; };
+		FF17D06927722C3E002283F2 /* RecipeDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF17D06827722C3E002283F2 /* RecipeDetailScreen.swift */; };
+		FF17D06C2772436A002283F2 /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF17D06B2772436A002283F2 /* RecipeView.swift */; };
+		FF17D06F27725448002283F2 /* lato_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF17D06E27725448002283F2 /* lato_regular.ttf */; };
+		FF17D07127725470002283F2 /* lato_light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF17D07027725470002283F2 /* lato_light.ttf */; };
+		FF17D073277254A4002283F2 /* lato_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF17D072277254A4002283F2 /* lato_bold.ttf */; };
+		FF17D075277254BD002283F2 /* lato_black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FF17D074277254BD002283F2 /* lato_black.ttf */; };
+		FF17D079277257C8002283F2 /* TypeExtenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF17D078277257C8002283F2 /* TypeExtenstion.swift */; };
+		FF17D07C2772582D002283F2 /* FontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF17D07B2772582D002283F2 /* FontModifier.swift */; };
 		FF843C6727695E080050FFAE /* SearchAppBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF843C6627695E080050FFAE /* SearchAppBar.swift */; };
 		FF987B2627666D83006C2981 /* RecipeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF987B2527666D83006C2981 /* RecipeListViewModel.swift */; };
 		FFB7B7342766618A00B4DC10 /* RecipeListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFB7B7332766618A00B4DC10 /* RecipeListScreen.swift */; };
+		FFEDE72C277282830050894A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFEDE72B277282830050894A /* Assets.xcassets */; };
+		FFEDE72E27728CFD0050894A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEDE72D27728CFD0050894A /* Color.swift */; };
+		FFEDE76627739E970050894A /* GenericAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFEDE76527739E960050894A /* GenericAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,9 +35,23 @@
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF9077F03B07AEBC9C565F3B /* Pods-iosLotus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosLotus.debug.xcconfig"; path = "Target Support Files/Pods-iosLotus/Pods-iosLotus.debug.xcconfig"; sourceTree = "<group>"; };
 		E8EF7EA20C84B4E8FB074C8B /* Pods-iosLotus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosLotus.release.xcconfig"; path = "Target Support Files/Pods-iosLotus/Pods-iosLotus.release.xcconfig"; sourceTree = "<group>"; };
+		FF17D0612771347C002283F2 /* FoodCategoryChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCategoryChip.swift; sourceTree = "<group>"; };
+		FF17D06327720992002283F2 /* RecipeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCard.swift; sourceTree = "<group>"; };
+		FF17D06627722A14002283F2 /* RecipeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewModel.swift; sourceTree = "<group>"; };
+		FF17D06827722C3E002283F2 /* RecipeDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailScreen.swift; sourceTree = "<group>"; };
+		FF17D06B2772436A002283F2 /* RecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeView.swift; sourceTree = "<group>"; };
+		FF17D06E27725448002283F2 /* lato_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lato_regular.ttf; sourceTree = "<group>"; };
+		FF17D07027725470002283F2 /* lato_light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lato_light.ttf; sourceTree = "<group>"; };
+		FF17D072277254A4002283F2 /* lato_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lato_bold.ttf; sourceTree = "<group>"; };
+		FF17D074277254BD002283F2 /* lato_black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lato_black.ttf; sourceTree = "<group>"; };
+		FF17D078277257C8002283F2 /* TypeExtenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeExtenstion.swift; sourceTree = "<group>"; };
+		FF17D07B2772582D002283F2 /* FontModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontModifier.swift; sourceTree = "<group>"; };
 		FF843C6627695E080050FFAE /* SearchAppBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAppBar.swift; sourceTree = "<group>"; };
 		FF987B2527666D83006C2981 /* RecipeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewModel.swift; sourceTree = "<group>"; };
 		FFB7B7332766618A00B4DC10 /* RecipeListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListScreen.swift; sourceTree = "<group>"; };
+		FFEDE72B277282830050894A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FFEDE72D27728CFD0050894A /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		FFEDE76527739E960050894A /* GenericAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,9 +96,11 @@
 		7555FF7D242A565900829871 /* iosLotus */ = {
 			isa = PBXGroup;
 			children = (
+				FF17D06D27725371002283F2 /* fonts */,
 				FFB7B7312766612C00B4DC10 /* presentation */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
+				FFEDE72B277282830050894A /* Assets.xcassets */,
 			);
 			path = iosLotus;
 			sourceTree = "<group>";
@@ -83,10 +113,60 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FF17D065277229F7002283F2 /* recipe_detail */ = {
+			isa = PBXGroup;
+			children = (
+				FF17D06A27724354002283F2 /* components */,
+				FF17D06627722A14002283F2 /* RecipeDetailViewModel.swift */,
+				FF17D06827722C3E002283F2 /* RecipeDetailScreen.swift */,
+			);
+			path = recipe_detail;
+			sourceTree = "<group>";
+		};
+		FF17D06A27724354002283F2 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				FF17D06B2772436A002283F2 /* RecipeView.swift */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		FF17D06D27725371002283F2 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FF17D074277254BD002283F2 /* lato_black.ttf */,
+				FF17D072277254A4002283F2 /* lato_bold.ttf */,
+				FF17D07027725470002283F2 /* lato_light.ttf */,
+				FF17D06E27725448002283F2 /* lato_regular.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		FF17D0762772576C002283F2 /* theme */ = {
+			isa = PBXGroup;
+			children = (
+				FF17D07A2772580F002283F2 /* typography */,
+				FFEDE72D27728CFD0050894A /* Color.swift */,
+			);
+			path = theme;
+			sourceTree = "<group>";
+		};
+		FF17D07A2772580F002283F2 /* typography */ = {
+			isa = PBXGroup;
+			children = (
+				FF17D078277257C8002283F2 /* TypeExtenstion.swift */,
+				FF17D07B2772582D002283F2 /* FontModifier.swift */,
+			);
+			path = typography;
+			sourceTree = "<group>";
+		};
 		FF843C6527695DE70050FFAE /* component */ = {
 			isa = PBXGroup;
 			children = (
 				FF843C6627695E080050FFAE /* SearchAppBar.swift */,
+				FF17D0612771347C002283F2 /* FoodCategoryChip.swift */,
+				FF17D06327720992002283F2 /* RecipeCard.swift */,
+				FFEDE76527739E960050894A /* GenericAlert.swift */,
 			);
 			path = component;
 			sourceTree = "<group>";
@@ -94,6 +174,8 @@
 		FFB7B7312766612C00B4DC10 /* presentation */ = {
 			isa = PBXGroup;
 			children = (
+				FF17D0762772576C002283F2 /* theme */,
+				FF17D065277229F7002283F2 /* recipe_detail */,
 				FF843C6527695DE70050FFAE /* component */,
 				FFB7B7322766614D00B4DC10 /* recipe_list */,
 			);
@@ -120,6 +202,7 @@
 				7555FF77242A565900829871 /* Sources */,
 				7555FF79242A565900829871 /* Resources */,
 				5FB580B74885F07BF5EA2CCB /* Frameworks */,
+				FD48592E773A33D03EA8B626 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -168,6 +251,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF17D06F27725448002283F2 /* lato_regular.ttf in Resources */,
+				FF17D07127725470002283F2 /* lato_light.ttf in Resources */,
+				FF17D075277254BD002283F2 /* lato_black.ttf in Resources */,
+				FF17D073277254A4002283F2 /* lato_bold.ttf in Resources */,
+				FFEDE72C277282830050894A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +284,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FD48592E773A33D03EA8B626 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosLotus/Pods-iosLotus-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iosLotus/Pods-iosLotus-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iosLotus/Pods-iosLotus-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -203,10 +308,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF17D06C2772436A002283F2 /* RecipeView.swift in Sources */,
 				FFB7B7342766618A00B4DC10 /* RecipeListScreen.swift in Sources */,
+				FF17D07C2772582D002283F2 /* FontModifier.swift in Sources */,
+				FF17D06727722A15002283F2 /* RecipeDetailViewModel.swift in Sources */,
 				FF843C6727695E080050FFAE /* SearchAppBar.swift in Sources */,
+				FFEDE72E27728CFD0050894A /* Color.swift in Sources */,
+				FFEDE76627739E970050894A /* GenericAlert.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				FF17D079277257C8002283F2 /* TypeExtenstion.swift in Sources */,
+				FF17D0622771347C002283F2 /* FoodCategoryChip.swift in Sources */,
 				FF987B2627666D83006C2981 /* RecipeListViewModel.swift in Sources */,
+				FF17D06927722C3E002283F2 /* RecipeDetailScreen.swift in Sources */,
+				FF17D06427720992002283F2 /* RecipeCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
